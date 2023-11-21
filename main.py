@@ -1,8 +1,8 @@
 import random
 import time
-from palavras import palavras
+from palavras import *
 
-palavra_secreta = random.choice(palavras)
+palavra_secreta = random.choice(palavras).upper()
 display = []
 op = 0
 tentativas = 0
@@ -10,60 +10,68 @@ letras = []
 
 while op != 'S':
     print("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-    print("welcome to jogo da forca modafocka")
+    print("***BEM VINDO AO JOGO DA FORCA!***")
     print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
     print("\nGostaria de jogar? S / N")
-    op = input("Enquanto vc nao quiser eu vou continuar perguntando ^^ entao aceita logo: ").upper()
+    op = input("Enquanto você não quiser eu vou continuar perguntando: ").upper()
     if op != 'S' and op != 'N':
-        print("\nNao adianta tentar digitar qualquer outra coisa suas opcoes sao(S/N) aceitar jogar ou responder nao pra sempre :p")
+        print("\nNão adianta tentar digitar qualquer outra coisa, suas opções são(S/N) aceitar jogar ou responder não pra sempre")
         time.sleep(1)
        
 
-print("\nBeleza! Fico feliz que tenha concordado espontaneamene em participar!")
+print("\nBeleza! Fico feliz que tenha concordado em participar!")
 time.sleep(1)
 
 print("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-print("***CASO NAO SAIBA TOMA AS REGRAS***")
+print("***CASO NAO SAIBA AS REGRAS SÃO***")
 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-print("\n1 - Voce tera um numero limitado de tentativas para as letras(5) mais o chute da palavra completa ao final")
-print("2 - Voce nao podera chutar a mesma letra mais de uma vez(seria burrice)")
-print("3 - A palavra tem o numero de letras exatamente igual ao numero de underscores(_) que aparecerao na tela")
-print("4 - Voce so pode tentar adivinhar a palavra quando acavarem suas tentativas")
-print("5 - As palavras nao terao acentuacao")
-time.sleep(2)
+print("\n1 - Você terá um número limitado de tentativas para as letras(7) mais o chute da palavra completa no final.")
+print("2 - Você não poderá chutar a mesma letra mais de uma vez(seria burrice)")
+print("3 - A palavra tem o número de letras exatamente igual ao número de underscores(_) que aparecerão na tela")
+print("4 - Você só pode tentar adivinhar a palavra quando acabarem suas tentativas")
+print("5 - As palavras não terão acentuação")
+time.sleep(1)
 
 print("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 print("***ENTENDIDAS AS REGRAS VAMOS AO JOGO***")
 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 
-for i in palavra_secreta:
+print("===============")
+print("||")
+print("||")
+print("||")
+print("||")
+print("||")
+print("||")
+print("||", end="   ")
+for i in range(len(palavra_secreta)):
     display.append("_")
-
-print(palavra_secreta)
-for i in range(len(display)):
     print(display[i], end="  ")
-    i +=1
     
-while tentativas < 5:
-    x = input("\nVamos la diga uma letra: ")
-    if x in letras:
-        print("\nEssa voce ja tentou! A tentativa sera desconsiderada.\n")
-    else:    
-        letras.append(x)
-    
-    for i in range(len(palavra_secreta)):
-        if x == palavra_secreta[i]:
-            display[i] = x
-    
-    for i in range(len(display)):
-        print(display[i], end="  ")
+while tentativas < 7:
+    x = input("\n\nVamos lá diga uma letra: ").upper()
+    if x in alfabeto:
+        if x in letras:
+            print("\nEssa você já tentou! A tentativa sera desconsiderada.\n")
+        else:    
+            letras.append(x)
+        if x in palavra_secreta:
+            print("\nÉ isso ai!! a letra", x, "está na nossa palavra secreta continue assim!\n")
+            for i in range(len(palavra_secreta)):
+                if x == palavra_secreta[i]:
+                    display[i] = x
+                print(display[i], end="  ")
+        else:
+            print("\nEssa letra não está na nossa palavra secreta, mas bola pra frente erros acontecem")
+            
+        tentativas +=1
+    else:
+        print("\nDigite apenas uma letra e sem acentos, simbolos etc")
         
-    tentativas +=1
-    
-print("Acabaram suas tentativas, vamos para o chute final!!")
-final = input("Qual vc pensa ser a palavra secreta? ")
+print("\nAcabaram suas tentativas, vamos para o chute final!!")
+final = input("\n\nQual vc pensa ser a palavra secreta? ").upper()
 
 if final == palavra_secreta:
-    print("acertou")
+    print("\nAcertou")
 else:
-    print("errou")
+    print("\nErrou!! A palavra era: ", palavra_secreta)
